@@ -6,6 +6,8 @@ showing only ten students at a time and using pages to navigate through the data
 Add a search bar at the top of the page to find a specific student more easily.
 */
 
+//Amount of students shown per page
+var studentsPerPage = 10;
 
 // =============ALPHABETICAL SORTING================================//
 
@@ -28,7 +30,7 @@ for (i=0; i < listLength; i++){
   studentList.children[0].remove()
 }
 //Append the first 10 divs in alphabetical order from the ordered array
-  for (i=0; i < 10; i++) {
+  for (i=0; i < studentsPerPage; i++) {
     studentList.append(studentArray[i]);
 }
 
@@ -39,7 +41,7 @@ var currentPage = 0;
 var paginationList = document.getElementsByClassName("pagination")[0].firstElementChild;
 //Calculate how many pages are there if 10 elements are displayed at a time
 //and approximation to the higher number, eg: 54 students ==> 5.4 pages ==> 6 pages
-var numPages = Math.ceil(listLength/10)
+var numPages = Math.ceil(listLength/studentsPerPage)
 //Create as many page buttons as required
 for (i=0; i < numPages; i++) {
   var paginationItem = document.createElement("li");
@@ -70,13 +72,13 @@ function addButtonInteraction () {
   //List the 10 students of the selected page
     currentPage = this.attributes.val.value; // gets the value stored into the button
       //Display at the top the range being shown
-        //Create span element
-        var studentsShown = document.createElement("span");
-        var bottomRange = 0+10*currentPage;
-        var topRange = 10+10*currentPage;
+        var bottomRange = 0+studentsPerPage*currentPage;
+        var topRange = studentsPerPage+studentsPerPage*currentPage;
         if (topRange > listLength) {
           topRange = listLength;
         }
+        //Create span element
+        var studentsShown = document.createElement("span");
         //Creating the text string
         var studentsShownText = document.createTextNode("Students "+(bottomRange+1)+" to "+topRange+" out of "+listLength);
         //Append the string to the span element
@@ -95,6 +97,9 @@ function addButtonInteraction () {
       }
     }
 }
+
+var studentsShown = document.createElement("span");
+var studentsShownText = document.createTextNode("Students 1 to "+studentsPerPage+" out of "+listLength);
 
 //Add the function to every button of the paginationList, triggered by click on the anchor
   for (i=0; i < numPages; i++) {

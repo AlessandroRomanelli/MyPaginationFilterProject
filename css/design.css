@@ -27,6 +27,12 @@ h3 {
     color: #555;
   }
 
+  .page-header span {
+    margin-left: 20px;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.33);
+  }
+
   .page-header .student-search{
     float: right;
   }
@@ -106,6 +112,7 @@ h3 {
 
   .pagination li{
     display: inline;
+    margin: 0 3px;
   }
 
     .pagination li a{
@@ -114,6 +121,7 @@ h3 {
       padding: 3px 8px;
       text-decoration: none;
       color: #4ba6c3;
+      cursor: pointer;
     }
 
     .pagination li a.active,
