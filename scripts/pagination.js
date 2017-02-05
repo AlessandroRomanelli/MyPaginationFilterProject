@@ -78,9 +78,9 @@ function searchStudent (searchInput) {
     //Clearing previous results
     clearStudents();
     for (i=0; i < studentsAmount; i++) {
-      var studentData = studentArray[i].innerText.toLowerCase();
-      //Trimming out the joined part
-      var studentDataTrim = studentData.substr(0, studentData.length-50);
+      var studentData = studentArray[i].getElementsByClassName("student-details")[0].innerText.toLowerCase();
+      //Trimming out the "@example.com"
+      var studentDataTrim = studentData.substr(0, studentData.length-25);
       //Checking for matches with all the students present in the list
       if (studentDataTrim.includes(searchInput)) {
         //If the student data is matched, push the student into the matched array
@@ -102,16 +102,16 @@ function searchStudent (searchInput) {
     //Otherwise
     } else {
       //Print every object of the matched array into the results' page
-      for (i=0; i < studentsPerPage; i++) {
+      for (i=0; i < studentsMatched.length; i++) {
         if (studentsMatched[i] !== undefined) {
           studentList.append(studentsMatched[i]);
         }
       }
     }
-    
-    //If the results exceed 10, resume pagination
-    if (studentsMatched.length > 10) {
-      paginationList.style.display= "block";
+
+    //If the search doesn't produce any results, refresh page
+    if (studentsMatched.length === studentsAmount) {
+      location.reload();
     }
 }
 
